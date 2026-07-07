@@ -1,6 +1,14 @@
 const request = require("supertest");
-
 const app = require("../src/app");
+const sequelize = require("../src/config/database");
+
+beforeAll(async () => {
+    await sequelize.sync({ force: true });
+});
+
+afterAll(async () => {
+    await sequelize.close();
+});
 
 describe("API de funcionários", () => {
     it("Deve cadastrar um funcionário", async () => {
@@ -15,9 +23,4 @@ describe("API de funcionários", () => {
         expect(resposta.body.nome).toBe("Maria");
         expect(resposta.body.cargo).toBe("Analista");
     });
-});
-const sequelize = require("../src/config/database");
-
-afterAll(async () => {
-    await sequelize.close();
 });
