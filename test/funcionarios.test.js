@@ -16,3 +16,8 @@ describe("API de funcionários", () => {
         expect(resposta.body.cargo).toBe("Analista");
     });
 });
+const sequelize = require("../src/config/database");
+
+afterAll(async () => {
+    await sequelize.close();
+});
