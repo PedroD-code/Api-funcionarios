@@ -3,7 +3,17 @@ const app = require("../src/app");
 const sequelize = require("../src/config/database");
 
 beforeAll(async () => {
-    await sequelize.sync({ force: true });
+    try {
+        await sequelize.authenticate();
+        console.log("Conectado ao banco!");
+
+        await sequelize.sync({ force: true });
+        console.log("Tabela criada!");
+    } catch (err) {
+        console.error("ERRO COMPLETO:");
+        console.error(err);
+        throw err;
+    }
 });
 
 afterAll(async () => {

@@ -34,7 +34,14 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 24
+          node-version: 22
+
+      - name: Verificar MySQL
+        run: |
+          until mysqladmin ping -h127.0.0.1 -uroot -p"$DB_PASSWORD" --silent; do
+            echo "Aguardando MySQL..."
+            sleep 2
+          done
 
       - run: npm install
 
