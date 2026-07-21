@@ -1,12 +1,15 @@
-require("dotenv").config();
+require("dotenv").config()
+const app = require("./app")
+const sequelize = require("./config/database")
 
-const app = require("./app");
-const sequelize = require("./config/database");
 
-const PORT = process.env.PORT || 3001;
+const PORT = 3002
 
-sequelize.sync().then(() => {
-    app.listen(PORT, () => {
-        console.log(`Servidor rodando na porta ${PORT}`);
-    });
-});
+
+//sincroniza tabelas automaticamente
+sequelize.sync()
+
+
+app.listen(PORT,()=>{
+    console.log(`Servidor iniciado na porta ${PORT}`)
+})

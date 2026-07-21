@@ -1,14 +1,14 @@
-const express = require("express");
-const cors = require("cors");
-const routes = require("./routes/funcionarioRoutes");
+const express = require("express")
+const routes = require("./routes/funcionarioRoutes")
+const sequelize = require("./config/database")
+const cors = require("cors")
 
-const app = express();
+const app = express()
 
-app.use(cors());
-app.use(express.json());
-app.use(routes);
+app.use(express.json())
+app.use(cors())
+app.use(routes)
 
-module.exports = app;
-app.use(cors({
-    origin: "http://localhost:3001"
-}));
+
+
+module.exports = app
